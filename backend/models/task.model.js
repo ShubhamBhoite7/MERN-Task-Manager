@@ -14,6 +14,10 @@ const taskSchema = new mongoose.Schema(
       type: String,
       status: { type: String, enum: ["TODO", "DONE"], default: "TODO" },
     },
+    linkedFile: {
+      data: Buffer,
+      contentType: String,
+    },
     deadline: {
       type: Date,
       required: true,
@@ -25,4 +29,3 @@ const taskSchema = new mongoose.Schema(
 const taskModel = mongoose.model("Task", taskSchema);
 
 module.exports = taskModel;
-console.log(taskModel);

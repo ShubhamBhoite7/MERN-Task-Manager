@@ -1,6 +1,6 @@
 const Task = require("../models/task.model");
 
-class TaskServive {
+class TaskService {
   find = async () => {
     const tasks = await Task.find({});
     return tasks;
@@ -25,4 +25,4 @@ class TaskServive {
   };
 }
 
-module.exports = TaskServive;
+module.exports = TaskService;
