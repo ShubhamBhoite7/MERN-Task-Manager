@@ -12,6 +12,14 @@ const taskModel = require("./models/task.model");
 
 const MONGODB_URI = "mongodb://localhost:27017/task-manager";
 
+const {
+  getTasks,
+  createTask,
+  updateTask,
+  deleteTask,
+} = require("./controllers/task.controller");
+
+console.log(getTasks, createTask, updateTask, deleteTask);
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
