@@ -9,7 +9,6 @@ import {
   Tooltip,
   Paper,
 } from "@mui/material";
-
 const TaskTable = ({
   tasks,
   onMarkAsDone,

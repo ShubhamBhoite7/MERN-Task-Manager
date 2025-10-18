@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import TaskTable from "./TaskTable";
 import TaskModal from "./TaskModal";
+import { LoadingIndicator } from "./loadingIndicator";
 
 export const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
@@ -11,11 +11,11 @@ export const TaskManager = () => {
   const [taskData, setTaskData] = useState(null);
   const [file, setFile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:8082/tasks");
+        const response = await axios.get(`${API_BASE_URL}/tasks`);
         setTasks(response.data);
       } catch (err) {
         console.error("Error fetching tasks:", err);
@@ -55,16 +55,16 @@ export const TaskManager = () => {
 
     try {
       if (isEditing) {
-        await axios.patch(`http://localhost:8082/tasks/${taskData._id}`, {
+        await axios.patch(`${API_BASE_URL}/tasks/${taskData._id}`, {
           title: taskData.title,
           description: taskData.description,
           deadline: taskData.deadline,
         });
       } else {
         console.log("formData in handleSave", formData);
-        await axios.post("http://localhost:8082/tasks", formData);
+        await axios.post(`${API_BASE_URL}/tasks`, formData);
       }
-      const response = await axios.get("http://localhost:8082/tasks");
+      const response = await axios.get(`${API_BASE_URL}/tasks`);
       setTasks(response.data);
       handleClose();
     } catch (err) {
@@ -83,10 +83,10 @@ export const TaskManager = () => {
 
   const handleMarkAsDone = async (taskId) => {
     try {
-      await axios.patch(`http://localhost:8082/tasks/${taskId}`, {
+      await axios.patch(`${API_BASE_URL}/tasks/${taskId}`, {
         status: "DONE",
       });
-      const response = await axios.get("http://localhost:8082/tasks");
+      const response = await axios.get(`${API_BASE_URL}/tasks`);
       setTasks(response.data);
     } catch (err) {
       console.error("Error updating task:", err);
@@ -108,8 +108,8 @@ export const TaskManager = () => {
   const handleDelete = async (taskId) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
       try {
-        await axios.delete(`http://localhost:8082/tasks/${taskId}`);
-        const response = await axios.get("http://localhost:8082/tasks");
+        await axios.delete(`${API_BASE_URL}/tasks/${taskId}`);
+        const response = await axios.get(`${API_BASE_URL}/tasks`);
         setTasks(response.data);
       } catch (err) {
         console.error("Error deleting task:", err);

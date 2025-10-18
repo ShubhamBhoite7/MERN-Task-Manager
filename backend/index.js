@@ -19,7 +19,7 @@ const PORT = process.env.PORT;
 const taskModel = require("./models/task.model");
 console.log(taskModel);
 
-const MONGODB_URI = "mongodb://localhost:27017/task-manager";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 console.log(getTasks, createTask, updateTask, deleteTask);
 mongoose
