@@ -2,7 +2,7 @@ import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-export const LoadingIndicator = () => (
+export default function LoadingIndicator() {
   <Box
     display="flex"
     justifyContent="center"
@@ -10,5 +10,5 @@ export const LoadingIndicator = () => (
     height="100vh"
   >
     <CircularProgress />
-  </Box>
-);
+  </Box>;
+}

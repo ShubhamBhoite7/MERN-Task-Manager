@@ -3,7 +3,6 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import TaskTable from "./TaskTable";
 import TaskModal from "./TaskModal";
-import { LoadingIndicator } from "./loadingIndicator";
 
 export const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
